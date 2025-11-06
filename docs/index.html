@@ -1,233 +1,318 @@
 <!doctype html>
 <html lang="vi">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Tiệm Choco Bomp Z.Z</title>
 
+  <!-- Google font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+
   <style>
-    * { margin:0; padding:0; box-sizing:border-box; }
-    body {
-      font-family: 'Poppins', sans-serif;
+    :root{
+      --bg1:#4A2C35; /* galaxy dark */
+      --bg2:#3B2027;
+      --accent:#C89B3C; /* gold highlight */
+      --card:#3a2618;
+      --muted:#e0d4c7;
+      --btn:#ffb347;
+      --btn-hover:#ffcc33;
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%}
+    body{
+      font-family:'Poppins',sans-serif;
       color:#fff;
-      background:#2b1d12;
+      background: linear-gradient(135deg,var(--bg1), #2e1b20 40%, #2b140f 100%);
+      -webkit-font-smoothing:antialiased;
       display:flex;
       min-height:100vh;
+      overflow-y:auto;
     }
-    a { text-decoration:none; color:inherit; }
+    a{color:inherit;text-decoration:none}
 
-    /* =====================
-       SIDEBAR MENU
-    ===================== */
-    nav {
+    /* layout */
+    nav{
       width:220px;
-      background:#3a2618;
-      padding:40px 20px;
+      background:linear-gradient(180deg,var(--bg2), #2f161c);
+      padding:28px 18px;
       flex-shrink:0;
     }
-    nav h2 {
-      color:#ffd580;
-      margin-bottom:30px;
-      font-size:1.6rem;
-    }
-    nav ul { list-style:none; }
-    nav ul li { margin-bottom:20px; }
-    nav ul li a {
-      font-size:1.1rem;
-      padding:8px 12px;
-      color:#e0d4c7;
-      display:block;
-      border-radius:8px;
-      transition:.3s;
-    }
-    nav ul li a:hover {
-      background:#ffd580;
-      color:#2b1d12;
-    }
+    nav h2{color:var(--accent);font-size:20px;margin-bottom:18px;font-weight:700}
+    nav ul{list-style:none}
+    nav li{margin-bottom:14px}
+    nav a{display:block;padding:8px 10px;border-radius:8px;color:var(--muted);transition:all .18s;font-weight:500}
+    nav a:hover{background:var(--accent);color:#2b140f}
 
-    main {
-      flex-grow:1;
-      padding:40px;
-      overflow-y:auto;
-      animation:fadeIn .8s ease-in-out;
-    }
+    main{flex:1;padding:28px;min-height:100vh}
 
-    /* =====================
-       HERO
-    ===================== */
-    .hero {
-      position:relative;
-      border-radius:16px;
-      overflow:hidden;
-      margin-bottom:40px;
-    }
-
-    /* ✅ Sửa lỗi ảnh bị cắt trên điện thoại */
-    .hero img {
-      width:100%;
-      height:350px;
-      object-fit:cover;
-      object-position:center;
-      filter:brightness(.75);
-    }
-
-    .overlay {
-      position:absolute;
-      top:0; left:0;
-      width:100%; height:100%;
-      display:flex;
-      flex-direction:column;
-      justify-content:center;
-      align-items:center;
+    /* HERO */
+    .hero{position:relative;border-radius:14px;overflow:hidden;margin-bottom:26px;box-shadow:0 8px 30px rgba(0,0,0,.45)}
+    .hero img{width:100%;height:380px;object-fit:cover;object-position:center;display:block;filter:brightness(.72)}
+    .overlay{
+      position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;
+      gap:8px;padding:22px;background:linear-gradient(180deg, rgba(0,0,0,.22), rgba(0,0,0,.45));
       text-align:center;
-      color:#ffd580;
-      padding:20px;
-      background:rgba(0,0,0,0.38);
-      text-shadow:2px 2px 10px rgba(0,0,0,0.8);
     }
 
-    /* ✅ Text mặc định (mobile) */
-    .hero-title {
-      font-size:2.2rem;
-      line-height:1.25;
-      margin-bottom:8px;
-      max-width:90%;
+    /* MELTING LOGO */
+    .logo {
+      position:relative;
+      font-weight:800;
+      letter-spacing:1px;
+      font-size:36px;
+      color:var(--accent);
+      line-height:1;
+      filter:drop-shadow(0 6px 18px rgba(0,0,0,.6));
+      padding:6px 14px;
     }
-    .hero-subtitle {
-      font-size:1.1rem;
-      color:#e0d4c7;
-      max-width:85%;
+    /* melted liquid overlay */
+    .logo::after{
+      content:'';
+      position:absolute;
+      left:0;right:0;bottom:-6px;
+      height:16px;
+      background:linear-gradient(180deg, rgba(72,40,36,0.0), rgba(72,40,36,0.9));
+      border-radius:50% 50% 36% 36% / 70% 70% 30% 30%;
+      transform-origin:center top;
+      animation: drip 2.6s linear infinite;
+      opacity:.95;
     }
+    /* several "drips" using pseudo elements via inner spans */
+    .logo .drip{position:absolute;bottom:-10px;left:14px;width:10px;height:16px;border-radius:6px;background:linear-gradient(180deg,#4b2a26,#2f160f);box-shadow:0 4px 10px rgba(0,0,0,.5);animation:drip1 2.8s linear infinite}
+    .logo .drip.d2{left:48%;width:12px;height:20px;animation:drip2 3.2s linear infinite}
+    .logo .drip.d3{right:22px;width:8px;height:14px;animation:drip3 3.6s linear infinite}
 
-    /* ✅ FIX LỖI CHỮ BỊ ĐÈ TRÊN MÀN HÌNH LỚN */
-    @media (min-width:768px) {
-      .hero img {
-        height:420px;
-      }
-      .hero-title {
-        font-size:3.5rem;
-        max-width:70%;
-      }
-      .hero-subtitle {
-        font-size:1.7rem;
-        max-width:60%;
-      }
+    @keyframes drip{
+      0%{transform:translateY(0)}
+      50%{transform:translateY(6px) scaleY(1.02)}
+      100%{transform:translateY(0)}
     }
+    @keyframes drip1{0%{transform:translateY(0)}60%{transform:translateY(10px)}100%{transform:translateY(0)}}
+    @keyframes drip2{0%{transform:translateY(0)}55%{transform:translateY(12px)}100%{transform:translateY(0)}}
+    @keyframes drip3{0%{transform:translateY(0)}65%{transform:translateY(8px)}100%{transform:translateY(0)}}
 
-    @media (min-width:1200px) {
-      .hero-title { font-size:4rem; }
-      .hero-subtitle { font-size:1.9rem; }
-    }
+    .hero-title{font-size:28px;font-weight:800;color:var(--accent)}
+    .hero-sub{font-size:15px;color:var(--muted);max-width:76%}
 
-    /* =====================
-       CONTENT SECTION
-    ===================== */
-    .section { margin-bottom:60px; }
-    .section h2 {
-      font-size:2rem;
-      margin-bottom:20px;
-      color:#ffd580;
-    }
-
-    /* PRODUCTS */
-    .products {
+    /* products carousel - swipe */
+    .section{margin-bottom:34px}
+    .section h2{font-size:20px;color:var(--accent);margin-bottom:12px}
+    .carousel-wrap{position:relative}
+    .carousel{
       display:flex;
-      flex-wrap:wrap;
-      gap:20px;
+      gap:16px;
+      overflow-x:auto;
+      scroll-snap-type:x mandatory;
+      -webkit-overflow-scrolling:touch;
+      padding-bottom:10px;
     }
-    .product {
-      background:#3a2618;
+    .card{
+      min-width:260px;
+      background:linear-gradient(180deg,#3a2618,#2f1913);
       border-radius:12px;
       overflow:hidden;
-      flex:1 1 calc(33% - 20px);
-      min-width:200px;
-      transition:.3s;
+      flex:0 0 auto;
+      scroll-snap-align:center;
+      box-shadow:0 10px 30px rgba(0,0,0,.45);
     }
-    .product:hover { transform:translateY(-8px); }
-    .product img { width:100%; height:180px; object-fit:cover; }
+    .card img{width:100%;height:170px;object-fit:cover;display:block}
+    .card .info{padding:14px}
+    .card h3{color:var(--accent);margin-bottom:6px;font-size:18px}
+    .price{font-weight:700;color:#ffd9a1;margin-bottom:8px}
+    .card p{color:var(--muted);font-size:14px;margin-bottom:12px}
+    .card .buy{display:inline-block;background:var(--btn);color:#2b140f;padding:8px 12px;border-radius:8px;font-weight:700}
 
-    .content { padding:20px; }
-    .content h3 {
-      color:#ffd580;
-      margin-bottom:10px;
-    }
-    .content p { margin-bottom:15px; color:#e0d4c7; }
-    .btn {
-      display:inline-block;
-      background:#ffb347;
-      color:#2b1d12;
-      padding:10px 20px;
-      border-radius:8px;
-      font-weight:600;
-      transition:.3s;
-    }
-    .btn:hover { background:#ffcc33; }
+    /* carousel arrows for desktop */
+    .arrow{position:absolute;top:42%;transform:translateY(-50%);background:rgba(0,0,0,.4);border-radius:8px;padding:10px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+    .arrow.left{left:-10px}
+    .arrow.right{right:-10px}
 
-    @keyframes fadeIn {
-      from {opacity:0; transform:translateY(20px);}
-      to {opacity:1; transform:translateY(0);}
+    /* bottom nav (mobile app style) */
+    .bottom-nav{
+      display:none;
+      position:fixed;left:0;right:0;bottom:10px;margin:auto;max-width:560px;height:56px;background:linear-gradient(90deg, rgba(0,0,0,.25), rgba(0,0,0,.12));backdrop-filter:blur(6px);
+      border-radius:12px;box-shadow:0 8px 30px rgba(0,0,0,.45);z-index:60;padding:6px 14px;align-items:center;justify-content:space-between;
     }
+    .bottom-nav a{color:var(--muted);font-weight:600;padding:8px 10px;border-radius:8px}
+    .bottom-nav a.active{color:var(--accent)}
+
+    /* responsive */
+    @media(min-width:900px){
+      .hero img{height:440px}
+      .hero-title{font-size:36px}
+      .hero-sub{font-size:18px}
+      .carousel{padding:6px 0}
+      .card{min-width:300px}
+      .arrow{display:flex}
+      .bottom-nav{display:none}
+    }
+    @media(max-width:899px){
+      nav{display:none}
+      body{background: linear-gradient(160deg,#3b2027,#2b1320)}
+      main{padding:18px}
+      .hero img{height:420px}
+      .hero-title{font-size:30px}
+      .hero-sub{font-size:14px}
+      .bottom-nav{display:flex;left:12px;right:12px}
+      .arrow{display:none}
+    }
+
+    /* small devices - ensure hero not cut */
+    @media(max-width:420px){
+      .hero img{height:420px;object-position:50% 40%}
+      .hero-title{font-size:26px}
+    }
+
+    /* small style tweaks */
+    .muted { color: var(--muted) }
   </style>
 </head>
-
 <body>
 
-  <!-- MENU -->
-  <nav>
+  <!-- SIDEBAR -->
+  <nav aria-label="Main menu">
     <h2>Tiệm Choco Bomp Z.Z</h2>
     <ul>
       <li><a href="#home">Trang đầu</a></li>
-      <li><a href="#cacao">Cacao Nóng Bomp</a></li>
-      <li><a href="#matcha">Matcha Nóng Bomp</a></li>
-      <li><a href="#milo">Milo Cream Bomp</a></li>
-      <li><a href="#contact">Liên hệ / Đặt hàng</a></li>
+      <li><a href="#cacao">Cacao</a></li>
+      <li><a href="#matcha">Matcha</a></li>
+      <li><a href="#milo">Milo</a></li>
+      <li><a href="#contact">Liên hệ</a></li>
     </ul>
   </nav>
 
   <main>
-
     <!-- HERO -->
-    <section id="home" class="hero">
-      <img src="https://cdn.pixabay.com/photo/2017/02/14/10/27/hot-chocolate-2069157_1280.jpg" alt="Cacao nóng chảy">
+    <section id="home" class="hero" aria-label="Hero">
+      <img src="https://cdn.pixabay.com/photo/2016/11/29/05/08/hot-chocolate-1869267_1280.jpg" alt="Ly cacao choco bomp marshmallow">
+      <div class="overlay" role="banner">
+        <div class="logo" aria-hidden="true">
+          <span class="drip"></span>
+          <span class="drip d2"></span>
+          <span class="drip d3"></span>
+          CHOCO BOMP Z.Z
+        </div>
 
-      <div class="overlay">
         <h1 class="hero-title">☕ CHOCO BOMP Z.Z ☕</h1>
-        <p class="hero-subtitle">Đậm vị cacao – Ấm lòng mùa đông</p>
+        <p class="hero-sub">Đậm vị cacao – Được phục vụ với marshmallow tan chảy, ấm lòng mùa đông.</p>
       </div>
     </section>
 
-    <!-- CACAO -->
+    <!-- PRODUCTS carousel (swipe) -->
     <section id="cacao" class="section">
-      <h2>Cacao Nóng</h2>
-      <div class="products">
-        <div class="product">
-          <img src="https://cdn.pixabay.com/photo/2020/01/04/10/20/hot-chocolate-4741270_1280.jpg">
-          <div class="content">
-            <h3>Ly Cacao Bomp</h3>
-            <p>Cacao nguyên chất + sữa tươi + chocolate tan chảy.</p>
-            <a class="btn" href="https://www.facebook.com/Huangkien16" target="_blank">Đặt ngay</a>
-          </div>
+      <h2>Các loại Bomp nổi bật</h2>
+
+      <div class="carousel-wrap" aria-roledescription="carousel">
+        <div class="arrow left" id="prev" aria-hidden="true">◀</div>
+        <div class="carousel" id="carousel">
+          <!-- card item -->
+          <article class="card" role="group" aria-label="Cacao Bomp">
+            <img src="https://cdn.pixabay.com/photo/2020/01/04/10/20/hot-chocolate-4741270_1280.jpg" alt="Ly cacao Choco Bomp">
+            <div class="info">
+              <h3>Ly Cacao Bomp</h3>
+              <div class="price">45.000₫</div>
+              <p class="muted">Cacao nguyên chất, sữa tươi, chocolate tan chảy.</p>
+              <a class="buy" href="https://www.facebook.com/Huangkien16" target="_blank">Đặt ngay</a>
+            </div>
+          </article>
+
+          <article class="card" role="group" aria-label="Matcha Bomp">
+            <img src="https://cdn.pixabay.com/photo/2021/09/14/14/08/matcha-6623139_1280.jpg" alt="Matcha Bomp">
+            <div class="info">
+              <h3>Matcha Bomp</h3>
+              <div class="price">40.000₫</div>
+              <p class="muted">Matcha Nhật, sữa tươi, topping choco.</p>
+              <a class="buy" href="https://www.facebook.com/Huangkien16" target="_blank">Đặt ngay</a>
+            </div>
+          </article>
+
+          <article class="card" role="group" aria-label="Milo Bomp">
+            <img src="https://cdn.pixabay.com/photo/2023/03/07/13/09/chocolate-drink-7836939_1280.jpg" alt="Milo Bomp">
+            <div class="info">
+              <h3>Milo Cream Bomp</h3>
+              <div class="price">39.000₫</div>
+              <p class="muted">Milo + kem phô mai + cacao bites.</p>
+              <a class="buy" href="https://www.facebook.com/Huangkien16" target="_blank">Đặt ngay</a>
+            </div>
+          </article>
+
+          <!-- you can add more cards similarly -->
         </div>
+        <div class="arrow right" id="next" aria-hidden="true">▶</div>
       </div>
     </section>
 
-    <!-- MATCHA -->
-    <section id="matcha" class="section">
-      <h2>Matcha nóng Bomp</h2>
-      <div class="products">
-        <div class="product">
-          <img src="https://cdn.pixabay.com/photo/2021/09/14/14/08/matcha-6623139_1280.jpg">
-          <div class="content">
-            <h3>Matcha Bomp nóng hổi</h3>
-            <p>Bột matcha Nhật + sữa tươi + Choco Bomp.</p>
-            <a class="btn" href="https://www.facebook.com/Huangkien16" target="_blank">Đặt ngay</a>
-          </div>
-        </div>
-      </div>
+    <!-- CONTACT -->
+    <section id="contact" class="section">
+      <h2>Liên hệ / Đặt hàng</h2>
+      <p class="muted">Nhắn tin Facebook hoặc Zalo để đặt hàng nhanh.</p>
+      <p class="muted">📞 0768360989 / 0385964113</p>
+      <a class="btn" href="https://www.facebook.com/Huangkien16" target="_blank">Inbox Me 💝</a>
     </section>
 
-    <!-- MILO -->
-    <section id="milo" class="section">
-      <h2>Milo Nóng Bomp</h2>
-      <div class="products">
-        <div
+  </main>
+
+  <!-- bottom nav mobile -->
+  <nav class="bottom-nav" role="navigation" aria-label="Bottom navigation">
+    <a href="#home" class="active">Trang chủ</a>
+    <a href="#cacao">Mua</a>
+    <a href="#contact">Liên hệ</a>
+    <a href="https://www.facebook.com/Huangkien16" target="_blank">Inbox</a>
+  </nav>
+
+  <script>
+    // Simple carousel next/prev logic + keyboard support
+    (function(){
+      const carousel = document.getElementById('carousel');
+      const next = document.getElementById('next');
+      const prev = document.getElementById('prev');
+
+      function scrollByCard(dir){
+        const card = carousel.querySelector('.card');
+        if(!card) return;
+        const w = card.getBoundingClientRect().width + 16; // gap
+        carousel.scrollBy({left: dir * w, behavior:'smooth'});
+      }
+      if(next) next.addEventListener('click', ()=>scrollByCard(1));
+      if(prev) prev.addEventListener('click', ()=>scrollByCard(-1));
+
+      // enable dragging on desktop & touch swipe fine on mobile
+      let pressed=false, startX, scrollLeft;
+      carousel.addEventListener('mousedown', (e)=>{
+        pressed=true; carousel.classList.add('dragging');
+        startX = e.pageX - carousel.offsetLeft;
+        scrollLeft = carousel.scrollLeft;
+      });
+      carousel.addEventListener('mouseleave', ()=>{pressed=false; carousel.classList.remove('dragging')});
+      carousel.addEventListener('mouseup', ()=>{pressed=false; carousel.classList.remove('dragging')});
+      carousel.addEventListener('mousemove', (e)=>{
+        if(!pressed) return;
+        e.preventDefault();
+        const x = e.pageX - carousel.offsetLeft;
+        const walk = (x - startX) * 1; //scroll-fast
+        carousel.scrollLeft = scrollLeft - walk;
+      });
+
+      // keyboard arrows
+      window.addEventListener('keydown', (e)=>{
+        if(e.key === 'ArrowRight') scrollByCard(1);
+        if(e.key === 'ArrowLeft') scrollByCard(-1);
+      });
+
+      // show/hide arrows based on viewport
+      function updateArrows(){
+        const arrows = document.querySelectorAll('.arrow');
+        if(window.innerWidth < 900) arrows.forEach(a=>a.style.display='none');
+        else arrows.forEach(a=>a.style.display='flex');
+      }
+      updateArrows();
+      window.addEventListener('resize', updateArrows);
+
+      // ensure hero overlay logo has drip spans positioned - small tweak
+      // not needed: purely CSS animation
+    })();
+  </script>
+</body>
+</html>
